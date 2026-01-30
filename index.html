@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>Redis Cluster Resource</title>
+	<!-- metadata -->
+	<meta name="generator" content="S5" />
+	<meta name="version" content="S5 1.1" />
+	<meta name="presdate" content="20260203" />
+	<meta name="author" content="Andy Hill" />
+	<meta name="company" content="Indiana University" />
+	<!-- configuration parameters -->
+	<meta name="defaultView" content="slideshow" />
+	<meta name="controlVis" content="hidden" />
+	<!-- style sheet links -->
+	<link rel="stylesheet" href="https://unpkg.com/rivet-core@2.9.1/css/rivet.min.css">
+	<link rel="stylesheet" href="ui/default/slides.css" type="text/css" media="projection" id="slideProj" />
+	<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+	<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" />
+	<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
+	
+
+	<!-- S5 JS -->
+	<script src="ui/default/slides.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+	<div class="layout">
+		<div id="controls"><!-- DO NOT EDIT --></div>
+		<div id="currentSlide"><!-- DO NOT EDIT --></div>
+		<div id="header"><h1>Indiana University</h1></div>
+		<div id="footer">
+			<h1>Redis Cluster Resource</h1>
+			<h2>Andy Hill &#8226; 2026</h2>
+		</div>
+
+	</div>
+	<div class="presentation">
+
+		<div class="slide">
+			<h1>Redis Cluster Resource</h1>
+			<h3>Andy Hill</h3>
+		</div>
+
+
+		<div class="slide">
+			<h1>What Is Needed for a Redis Cluster?</h1>
+			<ul>
+				<li>A stateful set in a Kubernetes cluster</li>
+				<li>A Kubernetes secret</li>
+				<li>That same secret stored in Vault</li>
+				<li>If associated with a Launchpad app, additional configuration stored in Vault</li>
+			</ul>
+		</div>
+
+
+		<div class="slide">
+			<h1>What is the current practice?</h1>
+			<ul>
+				<li>Create a Helm YAML file for each cluster</li>
+				<li>Log into Kubernetes and create a secret and label</li>
+				<li>Store the secret in Vault</li>
+				<li>Create a pull request</li>
+				<li>If the cluster is associated with a Launchpad app:
+					<ul>		
+						<li>Create a metadata patch file with additional configuration</li>
+						<li>Provision the application and retrieve the patched JSON file from Argo</li>
+						<li>Use the patched JSON file to run <code>launchpad-terraform-vault</code></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+
+		<div class="slide">
+			<h1>What are the problems with this?</h1>
+			<ul>
+				<li>Tedious, error prone process</li>
+				<li>Using a file to represent the cluster, prevents having multiple databases per cluster</li>
+				<li>Clusters are not explicitly tied to an organization or application environment</li>
+				<li>No UI possible with the file based/PR approach</li>
+			</ul>
+		</div>
+
+
+		<div class="slide">
+			<h1>Enter The Redis Cluster Resource</h1>
+			<ul>
+				<li>Cluster is clearly associated with an organization/application environment</li>
+				<li>Post/patch request to create/update cluster</li>
+				<li>UI for administrative use and eventual self-service</li>
+			</ul>
+		</div>
+
+
+		<div class="slide">
+			<h1>Resource Specification</h1>
+			<ul>
+				<li>Defines attributes and properties of the Redis Cluster resource</li>
+				<li>Defines valid attribute options that can be used in a form or for validation</li>
+				<li>Additional validation can be added through code</li>
+			</ul>
+		</div>
+
+
+		<div class="slide title-slide">
+			<h1>Demo</h1>
+			<h3>UI Demo!</h3>
+		</div>
+
+
+		<div class="slide">
+			<h1>Next Steps</h1>
+			<ul>
+				<li>Create migration script</li>
+				<li>Add Argo workflows to run <code>helm-redis</code> and provision Vault</li>
+			</ul>
+		</div>
+
+	</div>
+
+</body>
+
+</html>
