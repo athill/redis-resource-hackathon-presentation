@@ -30,7 +30,9 @@
 	<div class="layout">
 		<div id="controls"><!-- DO NOT EDIT --></div>
 		<div id="currentSlide"><!-- DO NOT EDIT --></div>
-		<div id="header"><h1>Indiana University</h1></div>
+		<div id="header"><h1><svg xmlns="http://www.w3.org/2000/svg" alt="" height="5%" viewBox="0 0 20 50" width="5%">
+            <polygon fill="currentColor" points="13.33 3.32 13.33 5.21 14.76 5.21 14.76 15.64 11.9 15.64 11.9 1.9 13.33 1.9 13.33 0 6.67 0 6.67 1.9 8.09 1.9 8.09 15.64 5.24 15.64 5.24 5.21 6.67 5.21 6.67 3.32 0 3.32 0 5.21 1.43 5.21 1.43 17.47 3.7 19.91 8.09 19.91 8.09 22.76 6.67 22.76 6.67 25.13 13.33 25.13 13.33 22.76 11.9 22.76 11.9 19.91 16.1 19.91 18.56 17.47 18.56 5.21 20 5.21 20 3.32 13.33 3.32"></polygon>
+        </svg></h1></div>
 		<div id="footer">
 			<h1>Redis Cluster Resource</h1>
 			<h2>Andy Hill &#8226; 2026</h2>
@@ -49,7 +51,7 @@
 			<h1>What Is Needed for a Redis Cluster?</h1>
 			<ul>
 				<li>A stateful set in a Kubernetes cluster</li>
-				<li>A Kubernetes secret</li>
+				<li>A Kubernetes secret to authenticate to the cluster</li>
 				<li>That same secret stored in Vault</li>
 				<li>If associated with a Launchpad app, additional configuration stored in Vault</li>
 			</ul>
@@ -60,8 +62,8 @@
 			<h1>What is the current practice?</h1>
 			<ul>
 				<li>Create a Helm YAML file for each cluster</li>
-				<li>Log into Kubernetes and create a secret and label</li>
-				<li>Store the secret in Vault</li>
+				<li>Log into Kubernetes and create secrets and labels for each cluster</li>
+				<li>Store the secrets in Vault</li>
 				<li>Create a pull request</li>
 				<li>If the cluster is associated with a Launchpad app:
 					<ul>		
@@ -78,7 +80,7 @@
 			<h1>What are the problems with this?</h1>
 			<ul>
 				<li>Tedious, error prone process</li>
-				<li>Using a file to represent the cluster, prevents having multiple databases per cluster</li>
+				<li>Using a file to represent the cluster prevents having multiple databases per cluster</li>
 				<li>Clusters are not explicitly tied to an organization or application environment</li>
 				<li>No UI possible with the file based/PR approach</li>
 			</ul>
@@ -114,13 +116,16 @@
 		<div class="slide">
 			<h1>Next Steps</h1>
 			<ul>
-				<li>Create migration script</li>
+				<li>Create migration script (similar to halm-rbac)</li>
+				<li>Create transformer script (similar to halm-rbac)</li>
 				<li>Add Argo workflows to run <code>helm-redis</code> and provision Vault</li>
 			</ul>
 		</div>
 
+		<div class="slide title-slide">
+			<h1>Questions?</h1>
+			<h3>Thank You!</h3>
+
 	</div>
-
 </body>
-
 </html>
